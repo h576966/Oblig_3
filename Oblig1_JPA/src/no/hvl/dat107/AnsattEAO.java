@@ -27,11 +27,11 @@ public class AnsattEAO {
 		return ansatt;
 	}
 
-	public List<Ansatt> finnAnsattMedBn(String brukernavn) {
+	public Ansatt finnAnsattMedBn(String brukernavn) {
 		
 		EntityManager em = emf.createEntityManager();
 		
-		List<Ansatt> ansatt;
+		Ansatt ansatt;
 		
 		try {
 			//https://docs.oracle.com/javaee/6/tutorial/doc/bnbtg.html
@@ -39,7 +39,7 @@ public class AnsattEAO {
 			"SELECT a FROM Ansatt a WHERE a.brukernavn "
 			+ "LIKE :brukernavn", Ansatt.class);
 			query.setParameter("brukernavn", brukernavn);
-			ansatt = query.getResultList();
+			ansatt = query.getSingleResult();
 			
 		} finally {
 			em.close();
