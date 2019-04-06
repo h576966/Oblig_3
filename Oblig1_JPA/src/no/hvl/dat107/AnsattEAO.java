@@ -39,6 +39,7 @@ public class AnsattEAO {
 			"SELECT a FROM Ansatt a WHERE a.brukernavn "
 			+ "LIKE :brukernavn", Ansatt.class);
 			query.setParameter("brukernavn", brukernavn);
+			System.out.println(query);
 			ansatt = query.getSingleResult();
 			
 		} finally {

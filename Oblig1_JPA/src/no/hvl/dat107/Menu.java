@@ -1,7 +1,10 @@
 package no.hvl.dat107;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.persistence.NoResultException;
 
 public class Menu {
 	Scanner userInput;
@@ -17,7 +20,7 @@ public class Menu {
 		avdelingEAO = new AvdelingEAO();
 		userInput = new Scanner(System.in);
 	}
-	
+
 	public void finalize() {
 		userInput.close();
 	}
@@ -34,14 +37,28 @@ public class Menu {
 			}
 		}
 	}
-	
+
+	private String getUserString() {
+//		String userString = "";
+//		while (true) {
+//			if (userInput.hasNext()) {
+//				userString = userInput.next();
+//				return userString;
+//			} else {
+//				
+//			}
+//		}
+		return userInput.next();
+	}
+
 	private void pauseForInput() {
 		System.out.println("Any key to continue...");
 		userInput.next();
+		start();
 	}
 
 	private void start() {
-		System.out.println("Velkommen til et elendigt menysystem!" + "PLEASE SELECT AN ACTION FROM THE FOLLOWING: \n"
+		System.out.println("Velkommen til et elendigt menysystem!\n" + "PLEASE SELECT AN ACTION FROM THE FOLLOWING: \n"
 				+ "1. Ansatt valg.\n" + "2. Not implemented.\n" + "3. Not implemented.\n" + "0. Exit.");
 		int userSelection = getUserInt();
 		switch (userSelection) {
@@ -50,9 +67,11 @@ public class Menu {
 			break;
 		case 2:
 			System.out.println("WHAT ABOUT NOT IMPLEMENTED DID YOU NOT UNDERSTAND?!");
+			pauseForInput();
 			break;
 		case 3:
 			System.out.println("WHAT ABOUT NOT IMPLEMENTED DID YOU NOT UNDERSTAND?!");
+			pauseForInput();
 			break;
 		case 0:
 			System.out.println("Terminating.");
@@ -61,6 +80,7 @@ public class Menu {
 			break;
 		default:
 			System.out.println("Ha ha, very funny.");
+			pauseForInput();
 		}
 	}
 
@@ -72,19 +92,42 @@ public class Menu {
 		int userSelection = getUserInt();
 		switch (userSelection) {
 		case 1:
-			Ansatt ansatt = ansattEAO.finnAnsattMedId(1);
-			System.out.println("a) Hente ut ansatt med ansattId=1");
-			System.out.println("   " + ansatt);
+			System.out.println("Hvilken ansattID?");
+			int inputInt = 0;
+			inputInt = getUserInt();
+			try {
+				Ansatt ansatt = ansattEAO.finnAnsattMedId(inputInt);
+				System.out.println("a) Hente ut ansatt med ansattId=1");
+				System.out.println("   " + ansatt);
+			} catch (NoResultException e) {
+				System.out.println("No such result. " + e);
+			}
+			pauseForInput();
 			break;
 		case 2:
-			Ansatt ansatta = ansattEAO.finnAnsattMedBn("asdf");
-			System.out.println("a) Hente ut ansatt med bn=asdf");
-			System.out.println("   " + ansatta);
-			break;
+			while (true) {
+				System.out.println("Hvilket brukernavn?");
+				String input = getUserString();
+				System.out.println(input);
+				Ansatt ansatta;
+				try {
+					ansatta = ansattEAO.finnAnsattMedBn(input);
+					System.out.println("a) Hente ut ansatt med bn=" + input);
+					System.out.println("   " + ansatta);
+				} catch (NoResultException e) {
+					System.out.println("No such result. " + e);
+				}
+				pauseForInput();
+				break;
+			}
 		case 3:
 			List<Ansatt> ansattsb = ansattEAO.finnAlleAnsatte();
 			System.out.println("b) Hente ut alle ansatts");
-			System.out.println("   " + ansattsb);
+			Iterator iter = ansattsb.iterator();
+			while (iter.hasNext()) {
+				System.out.println("   " + iter.next());
+			}
+			pauseForInput();
 			break;
 		case 0:
 			System.out.println("Returning to main menu.");
