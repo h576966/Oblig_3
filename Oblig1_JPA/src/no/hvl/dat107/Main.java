@@ -1,5 +1,7 @@
 package no.hvl.dat107;
 
+import java.util.List;
+
 public class Main {
 
 	// Scanner tastatur = new Scanner(System.in);
@@ -11,18 +13,18 @@ public class Main {
 		System.out.println("a) Hente ut ansatt med ansattId=1");
 		System.out.println("   " + ansatt);
 
-//		Ansatt ansatt1 = ansattEAO.finnAnsattMedId(1);
-//		System.out.println("    " + ansatt1);
+		Ansatt ansatt1 = ansattEAO.finnAnsattMedId(1);
+		System.out.println("    " + ansatt1);
 
-//		 a)
-//		Ansatt ansatta = ansattEAO.finnAnsattMedBn("asdf");
-//		System.out.println("a) Hente ut ansatt med bn=asdf");
-//		System.out.println("   " + ansatta);
+		 //a)
+		List<Ansatt> ansatta = ansattEAO.finnAnsattMedBn("asdf");
+		System.out.println("a) Hente ut ansatt med bn=asdf");
+		System.out.println("   " + ansatta);
 
-//		// b)
-//		List<Ansatt> ansattsb = ansattEAO.finnAlleAnsatte();
-//		System.out.println("b) Hente ut alle ansatts");
-//		System.out.println("   " + ansattsb);
+		// b)
+		List<Ansatt> ansattsb = ansattEAO.finnAlleAnsatte();
+		System.out.println("b) Hente ut alle ansatts");
+		System.out.println("   " + ansattsb);
 
 //		// c)
 //		List<Ansatt> ansattsc = ansattEAO.finnAnsatteMedTekst("Hassan");
