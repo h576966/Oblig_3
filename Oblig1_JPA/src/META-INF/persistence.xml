@@ -5,10 +5,11 @@
     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
 	version="2.2">
 	
-	<persistence-unit name="ansattPersistenceUnit"
+	<persistence-unit name="ovingPersistenceUnit"
 		transaction-type="RESOURCE_LOCAL">
 
 		<class>no.hvl.dat107.Ansatt</class>
+		<class>.no.hvl.dat107.Avdeling</class>
 
 		<properties>
 			<!-- Generelle JPA properties -->

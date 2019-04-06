@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 public class AvdelingEAO {
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("avdelingPersistenceUnit");
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ovingPersistenceUnit");
 
 	public Avdeling finnAvdelingMedId(int avdelingId) {
 

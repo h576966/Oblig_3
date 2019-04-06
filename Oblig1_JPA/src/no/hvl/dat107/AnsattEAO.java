@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 
 public class AnsattEAO {
 
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ansattPersistenceUnit");
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ovingPersistenceUnit");
 
 	public Ansatt finnAnsattMedId(int ansattId) {
 
