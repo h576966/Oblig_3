@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Menu {
 	Scanner userInput;
 	AnsattEAO ansattEAO;
+	AvdelingEAO avdelingEAO;
 	
 	public Menu() {
 		setup();
@@ -13,6 +14,7 @@ public class Menu {
 	
 	private void setup() {
 		ansattEAO = new AnsattEAO();
+		avdelingEAO = new AvdelingEAO();
 	}
 	
 	private void findAnsatt() {
