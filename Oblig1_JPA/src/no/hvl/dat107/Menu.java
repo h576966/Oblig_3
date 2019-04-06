@@ -39,15 +39,6 @@ public class Menu {
 	}
 
 	private String getUserString() {
-//		String userString = "";
-//		while (true) {
-//			if (userInput.hasNext()) {
-//				userString = userInput.next();
-//				return userString;
-//			} else {
-//				
-//			}
-//		}
 		return userInput.next();
 	}
 
@@ -59,14 +50,14 @@ public class Menu {
 
 	private void start() {
 		System.out.println("Velkommen til et elendigt menysystem!\n" + "PLEASE SELECT AN ACTION FROM THE FOLLOWING: \n"
-				+ "1. Ansatt valg.\n" + "2. Not implemented.\n" + "3. Not implemented.\n" + "0. Exit.");
+				+ "1. Ansatt valg.\n" + "2. Avdeling valg.\n" + "3. Not implemented.\n" + "0. Exit.");
 		int userSelection = getUserInt();
 		switch (userSelection) {
 		case 1:
-			findAnsatt();
+			valgAnsatt();
 			break;
 		case 2:
-			System.out.println("WHAT ABOUT NOT IMPLEMENTED DID YOU NOT UNDERSTAND?!");
+			valgAvdeling();
 			pauseForInput();
 			break;
 		case 3:
@@ -84,7 +75,59 @@ public class Menu {
 		}
 	}
 
-	private void findAnsatt() {
+	private void valgAvdeling() {
+		System.out.println("Velg en av de folgende: ");
+		System.out.println("1. Finn avdeling via id.\n" + "2. Finn avdeling ved navn.\n" + "3. List alle avdelinger.\n"
+				+ "0. Return upwards.");
+
+		int userSelection = getUserInt();
+		switch (userSelection) {
+		case 1:
+			System.out.println("Hvilken avdelingID?");
+			int inputInt = 0;
+			inputInt = getUserInt();
+			try {
+				Avdeling avdeling = avdelingEAO.finnAvdelingMedId(inputInt);
+				System.out.println("a) Hente ut ansatt med avdelingId=" + inputInt);
+				System.out.println("   " + avdeling);
+			} catch (NoResultException e) {
+				System.out.println("No such result. " + e);
+			}
+			pauseForInput();
+			break;
+		case 2:
+			while (true) {
+				System.out.println("Hvilket avdelingsnavn?");
+				String input = getUserString();
+				System.out.println(input);
+				Avdeling avdeling;
+				try {
+					avdeling = avdelingEAO.finnAvdelingMedNavn(input);
+					System.out.println("a) Hente ut ansatt med bn=" + input);
+					System.out.println("   " + avdeling);
+				} catch (NoResultException e) {
+					System.out.println("No such result. " + e);
+				}
+				pauseForInput();
+				break;
+			}
+		case 3:
+			List<Avdeling> avdelingsb = avdelingEAO.finnAlleAvdelinger();
+			System.out.println("b) Hente ut alle avdelinger");
+			Iterator iter = avdelingsb.iterator();
+			while (iter.hasNext()) {
+				System.out.println("   " + iter.next());
+			}
+			pauseForInput();
+			break;
+		case 0:
+			System.out.println("Returning to main menu.");
+			start();
+			break;
+		}
+	}
+
+	private void valgAnsatt() {
 		System.out.println("Velg en av de folgende: ");
 		System.out.println("1. Finn ansatt via id.\n" + "2. Finn ansatt ved brukernavn.\n" + "3. List alle ansatte.\n"
 				+ "0. Return upwards.");
@@ -97,7 +140,7 @@ public class Menu {
 			inputInt = getUserInt();
 			try {
 				Ansatt ansatt = ansattEAO.finnAnsattMedId(inputInt);
-				System.out.println("a) Hente ut ansatt med ansattId=1");
+				System.out.println("a) Hente ut ansatt med ansattId=" + inputInt);
 				System.out.println("   " + ansatt);
 			} catch (NoResultException e) {
 				System.out.println("No such result. " + e);
