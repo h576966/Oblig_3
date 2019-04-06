@@ -1,4 +1,3 @@
-
 DROP SCHEMA IF EXISTS oblig1_jpa CASCADE;
 
 CREATE SCHEMA oblig1_jpa;
@@ -15,6 +14,8 @@ CREATE TABLE ansatt
     maanedslonn     DECIMAL(10,2),
     CONSTRAINT Ansatt_pk PRIMARY KEY (ansattid)
 );
+
+
 
 INSERT INTO
   ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, stilling, maanedslonn)

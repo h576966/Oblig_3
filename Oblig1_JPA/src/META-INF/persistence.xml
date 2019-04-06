@@ -13,9 +13,9 @@
 		<properties>
 			<!-- Generelle JPA properties -->
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/svensken" />
-			<property name="javax.persistence.jdbc.user" value="snaron" />
-			<property name="javax.persistence.jdbc.password" value="0ldlady" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://data1.hib.no:5432/h580868" />
+			<property name="javax.persistence.jdbc.user" value="h580868" />
+			<property name="javax.persistence.jdbc.password" value="workingDATABASE5" />
 
             <!--  EclipseLink properties -->
             <!--  Se https://wiki.eclipse.org/EclipseLink/Examples/JPA/Logging -->
