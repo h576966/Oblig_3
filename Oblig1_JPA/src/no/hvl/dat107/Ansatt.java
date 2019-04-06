@@ -82,6 +82,10 @@ public class Ansatt {
 	public void setEtternavn(String etternavn) {
 		this.etternavn = etternavn;
 	}
+	
+	public String getSjefInfo() {
+		return fornavn + " " + etternavn;
+	}
 
 	public LocalDate getAnsettelsedato() {
 		return ansettelsesdato;

@@ -66,7 +66,7 @@ public class AnsattEAO {
 	}
 	
 	
-	public void oppdaterAnsatt(Ansatt ansatt) { //inte färdig, stilling och eller lön!
+	public void oppdaterAnsatt(Ansatt ansatt) { //inte ferdig, stilling och eller lonn!
 
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
