@@ -1,5 +1,7 @@
 package no.hvl.dat107;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -129,7 +131,7 @@ public class Menu {
 
 	private void valgAnsatt() {
 		System.out.println("Velg en av de folgende: ");
-		System.out.println("1. Finn ansatt via id.\n" + "2. Finn ansatt ved brukernavn.\n" + "3. List alle ansatte.\n"
+		System.out.println("1. Finn ansatt via id.\n" + "2. Finn ansatt ved brukernavn.\n" + "3. List alle ansatte.\n" + "4. Oppdatere ansatt. \n" + "5. Legg til ny ansatt. \n" 
 				+ "0. Return upwards.");
 
 		int userSelection = getUserInt();
@@ -172,6 +174,60 @@ public class Menu {
 			}
 			pauseForInput();
 			break;
+		case 4: //Endrat 
+		System.out.println("Oppdatera Lonn 1. eller Stilling 2.");
+//			String input = getUserInt();
+//			System.out.println(input);
+			
+			int endre = userInput.nextInt();
+			if(endre == 1) {
+				System.out.print("Skriv id på ansatt som skal forandres");
+				int finn = userInput.nextInt();		
+				Ansatt forandreAns = ansattEAO.finnAnsattMedId(finn);
+				System.out.print("Skriv inn ny lönn");
+				BigDecimal nyLonn = userInput.nextBigDecimal();
+				forandreAns.setMaanedslonn(nyLonn);
+				ansattEAO.oppdaterAnsatt(forandreAns);
+				System.out.println(ansattEAO.finnAnsattMedId(finn));
+				
+			} else {
+				 	System.out.print("Skriv inn ID på ansatt som skal forandres");
+					int finn1 = userInput.nextInt();		
+					Ansatt forandreAns = ansattEAO.finnAnsattMedId(finn1);
+					System.out.print("Skriv inn ny stilling");
+					String nyStilling= userInput.next();
+					forandreAns.setStilling(nyStilling);
+					ansattEAO.oppdaterAnsatt(forandreAns);
+					System.out.println(ansattEAO.finnAnsattMedId(finn1));
+			}
+
+			pauseForInput();
+			break;
+		case 5: // Endret av Niklas & Darren kan bli knas
+		System.out.println("Legg til ny ansatt, skrev in Brukernavn XX");
+		
+		String nyBrukernavn = userInput.next();
+		System.out.println("Skriv inn Fornavn");
+		String nyFornavn = userInput.next();
+		System.out.println("Skriv inn Etternavn");
+		String nyEtternavn = userInput.next();
+		System.out.println("Skriv inn År: XXXX");
+		int aar = userInput.nextInt();
+		System.out.println("Skriv inn Månad: XX");
+		int maaned = userInput.nextInt();
+		System.out.println("Skriv inn Dag XX");
+		int dag = userInput.nextInt();
+		System.out.println("Ange Stilling");
+		String nyStilling = userInput.next();
+		System.out.println("Ange Lönn");
+		BigDecimal nyLonn = userInput.nextBigDecimal();
+		
+		Ansatt nyAnsatt = new Ansatt(nyBrukernavn, nyFornavn, nyEtternavn,
+				LocalDate.of(aar, maaned, dag), nyStilling, nyLonn);
+				ansattEAO.lagreNyAnsatt(nyAnsatt);
+			
+				pauseForInput();
+				break;
 		case 0:
 			System.out.println("Returning to main menu.");
 			start();

@@ -25,6 +25,12 @@ public class Avdeling {
 		this.avdelingsSjef = avdelingsSjef;
 	}
 	
+	public Avdeling(String avdelingsNavn) {
+
+		this.avdelingsNavn = avdelingsNavn;
+		this.avdelingsSjef = avdelingsSjef;
+	}
+	
 	public int getAvdelingId() {
 		return avdelingsId;
 	}

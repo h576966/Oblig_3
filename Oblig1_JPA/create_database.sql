@@ -5,9 +5,9 @@ SET search_path TO oblig1_jpa;
     
 CREATE TABLE ansatt
 (
-    ansattid		SERIAL,
-    brukernavn		VARCHAR(4) NOT NULL UNIQUE,
-    fornavn        	VARCHAR(20),
+    ansattid			SERIAL,
+    brukernavn			VARCHAR(4) NOT NULL UNIQUE,
+    fornavn        		VARCHAR(20),
     etternavn       	VARCHAR(20),
     ansettelsesdato 	DATE,
     stilling       		VARCHAR(20),
@@ -17,8 +17,8 @@ CREATE TABLE ansatt
 
     
 CREATE TABLE avdeling (
-	avdelingsid 		serial NOT NULL,
-	avdelingsnavn 	varchar(20) NOT NULL,
+	avdelingsid 		SERIAL NOT NULL,
+	avdelingsnavn 		varchar(20) NOT NULL,
 	avdelingssjef 		integer NOT NULL,
 	PRIMARY KEY (avdelingsid),
 	FOREIGN KEY (avdelingssjef) REFERENCES ansatt(ansattid) 
@@ -26,9 +26,9 @@ CREATE TABLE avdeling (
 );
 
 CREATE TABLE prosjekt (
-	prosjektid 		serial NOT NULL,
-	prosjektnavn 		varchar(20) NOT NULL,
-	beskrivelse 		varchar(50),
+	prosjektid 			SERIAL NOT NULL,
+	prosjektnavn 		VARCHAR(20) NOT NULL,
+	beskrivelse 		VARCHAR(50),
 	PRIMARY KEY (prosjektid)
 
 );
