@@ -12,14 +12,15 @@ CREATE TABLE ansatt
     ansettelsesdato 	DATE,
     stilling       		VARCHAR(20),
     maanedslonn     	DECIMAL(10,2),
+    ansattavd			INTEGER,
     PRIMARY KEY (ansattid)
 );
 
     
 CREATE TABLE avdeling (
 	avdelingsid 		SERIAL NOT NULL,
-	avdelingsnavn 		varchar(20) NOT NULL,
-	avdelingssjef 		integer NOT NULL,
+	avdelingsnavn 		VARCHAR(20) NOT NULL,
+	avdelingssjef 		INTEGER NOT NULL,
 	PRIMARY KEY (avdelingsid),
 	FOREIGN KEY (avdelingssjef) REFERENCES ansatt(ansattid) 
 	
@@ -34,9 +35,9 @@ CREATE TABLE prosjekt (
 );
 
 CREATE TABLE prosjektdeltagelse (
-	prosjektid		integer NOT NULL,
-	ansattid		integer NOT NULL,
-	prosjektrolle 	varchar(20) NOT NULL,
+	prosjektid		INTEGER NOT NULL,
+	ansattid		INTEGER NOT NULL,
+	prosjektrolle 	VARCHAR(20) NOT NULL,
 	arbeidstimer	DECIMAL(4,1),
 	PRIMARY KEY (prosjektid, ansattid),
 	FOREIGN KEY (prosjektid) REFERENCES prosjekt(prosjektid), 
@@ -46,13 +47,13 @@ CREATE TABLE prosjektdeltagelse (
 
  
 INSERT INTO
-  ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, stilling, maanedslonn)
+  ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, stilling, maanedslonn, ansattavd)
 VALUES
-    ('HA', 'Hassan', 	'Ali', 		'2003-03-20', 'Doggy', 		14000),
-    ('NJ', 'Niklas', 	'Johansson','2000-05-05', 'Standing',	14000),
-    ('KN', 'Katarina',	'Nedrelid', '2018-06-20', 'SittingDown', 37000),
-    ('DB', 'Darren', 	'Bernardo', '2018-06-20', 'BehindYou', 	41000),
-    ('DW', 'Didrik', 	'Whatever', '2018-06-20', 'On1Leg', 	7500);
+    ('HA', 'Hassan', 	'Ali', 		'2003-03-20', 'Doggy', 		14000, 	1),
+    ('NJ', 'Niklas', 	'Johansson','2000-05-05', 'Standing',	14000, 	1),
+    ('KN', 'Katarina',	'Nedrelid', '2018-06-20', 'SittingDown', 37000, 2),
+    ('DB', 'Darren', 	'Bernardo', '2018-06-20', 'BehindYou', 	41000, 	2),
+    ('DW', 'Didrik', 	'Whatever', '2018-06-20', 'On1Leg', 	7500, 	2);
    
 
 INSERT INTO
@@ -77,7 +78,8 @@ VALUES
     (3, 4,'prosjektmedarbeidare', 80),
     (3, 5,'ingen vet', 40.5);
 
-
+ALTER TABLE ansatt 
+ADD FOREIGN KEY (ansattavd) REFERENCES avdeling(avdelingsid);
 
 
       

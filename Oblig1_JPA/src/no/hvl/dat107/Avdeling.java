@@ -28,7 +28,7 @@ public class Avdeling {
 	public Avdeling(String avdelingsNavn) {
 
 		this.avdelingsNavn = avdelingsNavn;
-		this.avdelingsSjef = avdelingsSjef;
+		
 	}
 	
 	public int getAvdelingId() {
