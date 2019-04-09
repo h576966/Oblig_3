@@ -238,7 +238,7 @@ public class Menu {
 			BigDecimal nyLonn = getUserBigDec();
 
 			Ansatt nyAnsatt = new Ansatt(nyBrukernavn, nyFornavn, nyEtternavn, LocalDate.of(aar, maaned, dag),
-					nyStilling, nyLonn);
+					nyStilling, nyLonn, 1, 1);
 			ansattEAO.lagreNyAnsatt(nyAnsatt);
 
 			pauseForInput();

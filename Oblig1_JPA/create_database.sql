@@ -1,3 +1,5 @@
+
+
 DROP SCHEMA IF EXISTS oblig1_jpa CASCADE;
 
 CREATE SCHEMA oblig1_jpa;
@@ -12,7 +14,8 @@ CREATE TABLE ansatt
     ansettelsesdato 	DATE,
     stilling       		VARCHAR(20),
     maanedslonn     	DECIMAL(10,2),
-    ansattavd			INTEGER,
+    ansattavdeling		INTEGER,
+    ansattprosjekt		INTEGER,
     PRIMARY KEY (ansattid)
 );
 
@@ -47,13 +50,13 @@ CREATE TABLE prosjektdeltagelse (
 
  
 INSERT INTO
-  ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, stilling, maanedslonn, ansattavd)
+  ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, stilling, maanedslonn, ansattavdeling, ansattprosjekt)
 VALUES
-    ('HA', 'Hassan', 	'Ali', 		'2003-03-20', 'Doggy', 		14000, 	1),
-    ('NJ', 'Niklas', 	'Johansson','2000-05-05', 'Standing',	14000, 	1),
-    ('KN', 'Katarina',	'Nedrelid', '2018-06-20', 'SittingDown', 37000, 2),
-    ('DB', 'Darren', 	'Bernardo', '2018-06-20', 'BehindYou', 	41000, 	2),
-    ('DW', 'Didrik', 	'Whatever', '2018-06-20', 'On1Leg', 	7500, 	2);
+    ('HA', 'Hassan', 	'Ali', 		'2003-03-20', 'Doggy', 		14000, 	1, 1),
+    ('NJ', 'Niklas', 	'Johansson','2000-05-05', 'Standing',	14000, 	1, 1),
+    ('KN', 'Katarina',	'Nedrelid', '2018-06-20', 'SittingDown', 37000, 2, 1),
+    ('DB', 'Darren', 	'Bernardo', '2018-06-20', 'BehindYou', 	41000, 	2, 1),
+    ('DW', 'Didrik', 	'Whatever', '2018-06-20', 'On1Leg', 	7500, 	2, 1);
    
 
 INSERT INTO
@@ -79,7 +82,11 @@ VALUES
     (3, 5,'ingen vet', 40.5);
 
 ALTER TABLE ansatt 
-ADD FOREIGN KEY (ansattavd) REFERENCES avdeling(avdelingsid);
+ADD FOREIGN KEY (ansattavdeling) REFERENCES avdeling(avdelingsid);
+
+ALTER TABLE ansatt 
+ADD FOREIGN KEY (ansattprosjekt) REFERENCES prosjekt(prosjektid);
+
 
 
       

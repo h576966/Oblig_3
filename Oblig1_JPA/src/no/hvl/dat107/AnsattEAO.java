@@ -104,6 +104,18 @@ public class AnsattEAO {
 			}
 		} finally {
 			em.close();
+			
+//			public boolean checkIfSjef() {
+//				
+//						TypedQuery<Ansatt> query = em.createQuery("SELECT ansatt FROM Ansatt ansatt", Ansatt.class);
+//				if [select ansattid from ansatt a
+//				    join avdeling av on a.ansattid = av.avdelingssjef
+//				    where  2 = avdelingssjef;]{
+//				return true;
+//				} else {
+//				return false
+//				}`
+			
 		}
 	}
 
