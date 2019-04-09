@@ -1,3 +1,5 @@
+
+
 DROP SCHEMA IF EXISTS oblig1_jpa CASCADE;
 
 CREATE SCHEMA oblig1_jpa;
@@ -48,7 +50,7 @@ CREATE TABLE prosjektdeltagelse (
 
  
 INSERT INTO
-  ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, stilling, maanedslonn, ansattavd)
+  ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, stilling, maanedslonn, ansattavdeling, ansattprosjekt)
 VALUES
     ('HA', 'Hassan', 	'Ali', 		'2003-03-20', 'Doggy', 		14000, 	1, 1),
     ('NJ', 'Niklas', 	'Johansson','2000-05-05', 'Standing',	14000, 	1, 1),
@@ -80,7 +82,11 @@ VALUES
     (3, 5,'ingen vet', 40.5);
 
 ALTER TABLE ansatt 
-ADD FOREIGN KEY (ansattavd) REFERENCES avdeling(avdelingsid);
+ADD FOREIGN KEY (ansattavdeling) REFERENCES avdeling(avdelingsid);
+
+ALTER TABLE ansatt 
+ADD FOREIGN KEY (ansattprosjekt) REFERENCES prosjekt(prosjektid);
+
 
 
       
