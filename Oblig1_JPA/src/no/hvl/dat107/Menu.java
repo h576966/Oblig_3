@@ -131,7 +131,7 @@ public class Menu {
 		case 3:
 			List<Avdeling> avdelingsb = avdelingEAO.finnAlleAvdelinger();
 			System.out.println("b) Hente ut alle avdelinger");
-			Iterator iter = avdelingsb.iterator();
+			Iterator<Avdeling> iter = avdelingsb.iterator();
 			while (iter.hasNext()) {
 				System.out.println("   " + iter.next());
 			}
@@ -183,7 +183,7 @@ public class Menu {
 		case 3:
 			List<Ansatt> ansattsb = ansattEAO.finnAlleAnsatte();
 			System.out.println("b) Hente ut alle ansatte");
-			Iterator iter = ansattsb.iterator();
+			Iterator<Ansatt> iter = ansattsb.iterator();
 			while (iter.hasNext()) {
 				System.out.println("   " + iter.next());
 			}
@@ -291,7 +291,7 @@ public class Menu {
 		case 3:
 			List<Prosjekt> prosjekt = prosjektEAO.finnAlleProsjekter();
 			System.out.println("b) Hente ut alle prosjekt");
-			Iterator iter = prosjekt.iterator();
+			Iterator<Prosjekt> iter = prosjekt.iterator();
 			while (iter.hasNext()) {
 				System.out.println("   " + iter.next());
 			}
