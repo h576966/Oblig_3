@@ -12,6 +12,7 @@ public class Menu {
 	Scanner userInput;
 	AnsattEAO ansattEAO;
 	AvdelingEAO avdelingEAO;
+	ProsjektEAO prosjektEAO;
 
 	public Menu() {
 		setup();
@@ -20,6 +21,7 @@ public class Menu {
 	private void setup() {
 		ansattEAO = new AnsattEAO();
 		avdelingEAO = new AvdelingEAO();
+		prosjektEAO = new ProsjektEAO();
 		userInput = new Scanner(System.in);
 	}
 
@@ -43,7 +45,7 @@ public class Menu {
 	private String getUserString() {
 		return userInput.next();
 	}
-	
+
 	private BigDecimal getUserBigDec() {
 		BigDecimal userBigDec = new BigDecimal(-1);
 		while (true) {
@@ -247,6 +249,102 @@ public class Menu {
 			break;
 		}
 
+	}
+
+	public void valgProsjekt() {
+		System.out.println("Velg en av de folgende: ");
+		System.out.println(
+				"1. Finn prosjekt via id.\n" + "2. Finn prosjekt via prosjektnavn.\n" + "3. List alle prosjekt.\n"
+						+ "4. Oppdatere prosjekt. \n" + "5. Legg til nytt prosjekt. \n" + "0. Return upwards.");
+
+		int userSelection = getUserInt();
+		switch (userSelection) {
+		case 1:
+			System.out.println("Hvilket prosjektID?");
+			int inputInt = 0;
+			inputInt = getUserInt();
+			try {
+				Prosjekt prosjekt = prosjektEAO.finnProsjektMedId(inputInt);
+				System.out.println("a) Hente ut ansatt med prosjektId=" + inputInt);
+				System.out.println("   " + prosjekt);
+			} catch (NoResultException e) {
+				System.out.println("No such result. " + e);
+			}
+			pauseForInput();
+			break;
+		case 2:
+			while (true) {
+				System.out.println("Hvilket prosjektnavn?");
+				String input = getUserString();
+				System.out.println(input);
+				Prosjekt prosjekt;
+				try {
+					prosjekt = prosjektEAO.finnProsjektMedNavn(input);
+					System.out.println("a) Hente ut prosjekt med navn=" + input);
+					System.out.println("   " + prosjekt);
+				} catch (NoResultException e) {
+					System.out.println("No such result. " + e);
+				}
+				pauseForInput();
+				break;
+			}
+		case 3:
+			List<Prosjekt> prosjekt = prosjektEAO.finnAlleProsjekter();
+			System.out.println("b) Hente ut alle prosjekt");
+			Iterator iter = prosjekt.iterator();
+			while (iter.hasNext()) {
+				System.out.println("   " + iter.next());
+			}
+			pauseForInput();
+			break;
+		case 4:
+			System.out.println("Oppdatere 1. navn eller 2. beskrivelse.");
+//			String input = getUserInt();
+//			System.out.println(input);
+
+			int endre = getUserInt();
+			if (endre == 1) {
+				System.out.print("Skriv id paa prosjekt som skal forandres");
+				int finn = getUserInt();
+				Prosjekt prosjektChng = prosjektEAO.finnProsjektMedId(finn);
+				System.out.print("nytt navn");
+				String navn = getUserString();
+				prosjektChng.setProsjektNavn(navn);
+				;
+				prosjektEAO.oppdaterProsjekt(prosjektChng);
+				System.out.println(prosjektEAO.finnProsjektMedId(finn));
+
+			} else {
+				System.out.print("Skriv inn ID paa prosjekt som skal forandres");
+				int finn = getUserInt();
+				Prosjekt prosjektChng = prosjektEAO.finnProsjektMedId(finn);
+				System.out.print("Skriv inn ny beskrivelse");
+				String nyBeskrivelse = getUserString();
+				prosjektChng.setBeskrivelse(nyBeskrivelse);
+				prosjektEAO.oppdaterProsjekt(prosjektChng);
+				System.out.println(prosjektEAO.finnProsjektMedId(finn));
+			}
+
+			pauseForInput();
+			break;
+		case 5: // Altered from above to fit this
+			System.out.println("Legg til nytt prosjekt, skriv in Prosjektnavn");
+
+			String nyProsjektnavn = getUserString();
+			System.out.println("Skriv inn Fornavn");
+			System.out.println("Angi beskrivelse");
+			String nyBeskrivelse = getUserString();
+
+			Prosjekt nyProsjekt = new Prosjekt(nyProsjektnavn, nyBeskrivelse);
+			prosjektEAO.lagreNyProsjekt(nyProsjekt);
+
+			pauseForInput();
+			break;
+		case 0:
+			System.out.println("Returning to main menu.");
+			start();
+			break;
+		}
 	}
 
 	public void test() {
