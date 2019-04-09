@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +28,15 @@ public class Ansatt {
 	private LocalDate ansettelsesdato;
 	private String stilling = "";
 	private BigDecimal maanedslonn;
+	
+	@ManyToOne
+	@JoinColumn(name="avdeling", referencedColumnName="avdelingsid")
 	private int ansattAvdeling;
+	@ManyToMany
+//	JoinColumn(name="prosjekt", referencedColumnName="prosjektid")
 	private int ansattProsjekt;
+	
+	
 
 	public Ansatt() { // Trengs for JPA
 
