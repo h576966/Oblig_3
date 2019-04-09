@@ -67,7 +67,7 @@ public class Menu {
 
 	private void start() {
 		System.out.println("Velkommen til et elendigt menysystem!\n" + "PLEASE SELECT AN ACTION FROM THE FOLLOWING: \n"
-				+ "1. Ansatt valg.\n" + "2. Avdeling valg.\n" + "3. Not implemented.\n" + "0. Exit.");
+				+ "1. Ansatt valg.\n" + "2. Avdeling valg.\n" + "3. Prosjekt valg.\n" + "0. Exit.");
 		int userSelection = getUserInt();
 		switch (userSelection) {
 		case 1:
@@ -78,7 +78,7 @@ public class Menu {
 			pauseForInput();
 			break;
 		case 3:
-			System.out.println("WHAT ABOUT NOT IMPLEMENTED DID YOU NOT UNDERSTAND?!");
+			valgProsjekt();
 			pauseForInput();
 			break;
 		case 0:
