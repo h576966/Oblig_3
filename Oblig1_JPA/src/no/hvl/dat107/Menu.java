@@ -72,6 +72,7 @@ public class Menu {
 		switch (userSelection) {
 		case 1:
 			valgAnsatt();
+			pauseForInput();
 			break;
 		case 2:
 			valgAvdeling();
