@@ -16,7 +16,7 @@ public class ProsjektEAO {
 		Prosjekt prosjekt;
 
 		try {
-			prosjekt = em.find(Avdeling.class, prosjektId);
+			prosjekt = em.find(Prosjekt.class, prosjektId);
 
 		} finally {
 			em.close();
