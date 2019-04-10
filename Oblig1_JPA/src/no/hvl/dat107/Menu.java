@@ -25,7 +25,11 @@ public class Menu {
 		userInput = new Scanner(System.in);
 	}
 
+	@Override
 	public void finalize() {
+		ansattEAO = null;
+		avdelingEAO = null;
+		prosjektEAO = null;
 		userInput.close();
 	}
 
@@ -144,6 +148,48 @@ public class Menu {
 			break;
 		}
 	}
+	
+	private Ansatt finnAnsatt() {
+		System.out.println("Velg ett prosjekt: 1. ID eller 2. Navn.");
+		int selection = getUserInt();
+		Ansatt ansatt = null;
+		boolean loopHole = true;
+		switch (selection) {
+		case 1:
+			while (loopHole) {
+				System.out.println("Hvilket ansattID?");
+				int inputInt = 0;
+				inputInt = getUserInt();
+				try {
+					ansatt = ansattEAO.finnAnsattMedId(inputInt);
+					System.out.println("Henter ut prosjekt med prosjektId=" + inputInt);
+					System.out.println("   " + ansatt);
+					loopHole = false;
+				} catch (NoResultException e) {
+					System.out.println("No such result. " + e);
+				}
+				pauseForInput();
+				break;
+			}
+		case 2:
+			while (loopHole) {
+				System.out.println("Hvilket brukernavn?");
+				String input = getUserString();
+				System.out.println(input);
+				try {
+					ansatt = ansattEAO.finnAnsattMedBn(input);
+					System.out.println("Henter ut prosjekt med navn=" + input);
+					System.out.println("   " + ansatt);
+					loopHole = false;
+				} catch (NoResultException e) {
+					System.out.println("No such result. " + e);
+				}
+				pauseForInput();
+				break;
+			}
+		}
+		return ansatt;
+	}
 
 	private void valgAnsatt() {
 		System.out.println("Velg en av de folgende: ");
@@ -252,37 +298,82 @@ public class Menu {
 
 	}
 
-	public void valgProsjekt() {
-		System.out.println("Velg en av de folgende: ");
-		System.out.println(
-				"1. Finn prosjekt via id.\n" + "2. Finn prosjekt via prosjektnavn.\n" + "3. List alle prosjekt.\n"
-						+ "4. Oppdatere prosjekt. \n" + "5. Legg til nytt prosjekt. \n" + "0. Return upwards.");
-
-		int userSelection = getUserInt();
-		switch (userSelection) {
+	private Prosjekt finnProsjekt() {
+		System.out.println("Velg ett prosjekt: 1. ID eller 2. Navn.");
+		int selection = getUserInt();
+		Prosjekt prosjekt = null;
+		boolean loopHole = true;
+		switch (selection) {
 		case 1:
-			System.out.println("Hvilket prosjektID?");
-			int inputInt = 0;
-			inputInt = getUserInt();
-			try {
-				Prosjekt prosjekt = prosjektEAO.finnProsjektMedId(inputInt);
-				System.out.println("a) Hente ut ansatt med prosjektId=" + inputInt);
-				System.out.println("   " + prosjekt);
-			} catch (NoResultException e) {
-				System.out.println("No such result. " + e);
+			while (loopHole) {
+				System.out.println("Hvilket prosjektID?");
+				int inputInt = 0;
+				inputInt = getUserInt();
+				try {
+					prosjekt = prosjektEAO.finnProsjektMedId(inputInt);
+					System.out.println("Henter ut prosjekt med prosjektId=" + inputInt);
+					System.out.println("   " + prosjekt);
+					loopHole = false;
+				} catch (NoResultException e) {
+					System.out.println("No such result. " + e);
+				}
+				pauseForInput();
+				break;
 			}
-			pauseForInput();
-			break;
 		case 2:
-			while (true) {
+			while (loopHole) {
 				System.out.println("Hvilket prosjektnavn?");
 				String input = getUserString();
 				System.out.println(input);
-				Prosjekt prosjekt;
 				try {
 					prosjekt = prosjektEAO.finnProsjektMedNavn(input);
-					System.out.println("a) Hente ut prosjekt med navn=" + input);
+					System.out.println("Henter ut prosjekt med navn=" + input);
 					System.out.println("   " + prosjekt);
+					loopHole = false;
+				} catch (NoResultException e) {
+					System.out.println("No such result. " + e);
+				}
+				pauseForInput();
+				break;
+			}
+		}
+		return prosjekt;
+	}
+
+	private void valgProsjekt() {
+		System.out.println("Velg en av de folgende: ");
+		System.out.println("1. Finn prosjekt via id.\n" + "2. Finn prosjekt via prosjektnavn.\n"
+				+ "3. List alle prosjekt.\n" + "4. Oppdatere prosjekt. \n" + "5. Legg til nytt prosjekt. \n"
+				+ "6. Registrer nye medlemmer i et prosjekt.\n" + "7. Fjern medlemmer fra et prosjekt.\n"
+				+ "0. Return upwards.");
+
+		int userSelection = getUserInt();
+		boolean loopHole = true;
+		switch (userSelection) {
+		case 1:
+			while (loopHole) {
+				System.out.println("Hvilket prosjektID?");
+				int inputInt = getUserInt();
+				try {
+					Prosjekt prosjekt = prosjektEAO.finnProsjektMedId(inputInt);
+					System.out.println("Henter ut prosjekt med prosjektId=" + inputInt);
+					System.out.println("   " + prosjekt);
+					loopHole = false;
+				} catch (NoResultException e) {
+					System.out.println("No such result. " + e);
+				}
+				pauseForInput();
+				break;
+			}
+		case 2:
+			while (loopHole) {
+				System.out.println("Hvilket prosjektnavn?");
+				String input = getUserString();
+				try {
+					Prosjekt prosjekt = prosjektEAO.finnProsjektMedNavn(input);
+					System.out.println("Henter ut prosjekt med navn=" + input);
+					System.out.println("   " + prosjekt);
+					loopHole = false;
 				} catch (NoResultException e) {
 					System.out.println("No such result. " + e);
 				}
@@ -339,6 +430,36 @@ public class Menu {
 			Prosjekt nyProsjekt = new Prosjekt(nyProsjektnavn, nyBeskrivelse);
 			prosjektEAO.lagreNyProsjekt(nyProsjekt);
 
+			pauseForInput();
+			break;
+		case 6:
+			Prosjekt prosjektAdd = finnProsjekt();
+			if (prosjektAdd == null) {
+				System.out.println("No project found or invalid choice, returning.");
+				pauseForInput();
+			}
+			Ansatt ansattToAdd = finnAnsatt();
+			if (ansattToAdd == null)  {
+				System.out.println("No ansatt found or invalid choice, returning.");
+				pauseForInput();
+			}
+			
+			ansattEAO.registrerProsjektdeltagelse(ansattToAdd, prosjektAdd);
+			pauseForInput();
+			break;
+		case 7:
+			Prosjekt prosjektRemove = finnProsjekt();
+			if (prosjektRemove == null) {
+				System.out.println("No project found or invalid choice, returning.");
+				pauseForInput();
+			}
+			Ansatt ansattToRemove = finnAnsatt();
+			if (ansattToRemove == null)  {
+				System.out.println("No ansatt found or invalid choice, returning.");
+				pauseForInput();
+			}
+			
+			ansattEAO.fjernProsjektdeltagelse(ansattToRemove, prosjektRemove);
 			pauseForInput();
 			break;
 		case 0:
