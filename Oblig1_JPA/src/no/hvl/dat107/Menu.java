@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 import javax.persistence.NoResultException;
 
+import no.hvl.dat107.EAO.AnsattEAO;
+import no.hvl.dat107.EAO.AvdelingEAO;
+
 public class Menu {
 	Scanner userInput;
 	AnsattEAO ansattEAO;

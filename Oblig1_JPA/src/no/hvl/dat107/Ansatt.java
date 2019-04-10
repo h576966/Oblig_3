@@ -33,7 +33,6 @@ public class Ansatt {
 	@JoinColumn(name="avdeling", referencedColumnName="avdelingsid")
 	private int ansattAvdeling;
 	@ManyToMany(mappedBy="ansatte")
-//	JoinColumn(name="prosjekt", referencedColumnName="prosjektid")
 	private int ansattProsjekt;
 	
 	
