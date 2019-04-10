@@ -32,7 +32,7 @@ public class Ansatt {
 	@ManyToOne
 	@JoinColumn(name="avdeling", referencedColumnName="avdelingsid")
 	private int ansattAvdeling;
-	@ManyToMany
+	@ManyToMany(mappedBy="ansatte")
 //	JoinColumn(name="prosjekt", referencedColumnName="prosjektid")
 	private int ansattProsjekt;
 	

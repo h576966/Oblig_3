@@ -119,15 +119,56 @@ public class AnsattEAO {
 		}
 	}
 
-//		
-//		public void registrerProsjektdeltagelse(Ansatt a, Prosjekt p) {
-//			
-//			EntityManager em = emf.createEntityManager();
-//			EntityTransaction tx = em.getTransaction();
-//			try {
-//				tx.be
-//			}
-//		}
+		
+	public void registrerProsjektdeltagelse(Ansatt a, Prosjekt p) {
+			
+			EntityManager em = emf.createEntityManager();
+			EntityTransaction tx = em.getTransaction();
+			try {
+				tx.begin();
+				
+				a = em.merge(a);
+				p = em.merge(p);
+				
+				a.leggTilProsjekt(p);
+				p.leggTilAnsatt(a);
+				
+				tx.commit();
+				
+			} catch (Throwable e) {
+				e.printStackTrace();;
+				if (tx.isActive()) {
+					tx.rollback();
+				}
+			} finally {
+				em.close();
+			}
+		}
+	
+	public void fjernProsjektdeltagelse(Ansatt a, Prosjekt p) {
+		
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		try {
+			tx.begin();
+			
+			a = em.merge(a);
+			p = em.merge(p);
+			
+			a.fjernProsjekt(p);
+			p.fjernAnsatt(a);
+			
+			tx.commit();
+			
+		} catch (Throwable e) {
+			e.printStackTrace();;
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+		} finally {
+			em.close();
+		}
+	}
 
 //	
 //	public List<Ansatt> finnAnsatteMedTekst(String fornavn) {
