@@ -10,6 +10,7 @@ import javax.persistence.NoResultException;
 
 import no.hvl.dat107.EAO.AnsattEAO;
 import no.hvl.dat107.EAO.AvdelingEAO;
+import no.hvl.dat107.EAO.ProsjektEAO;
 
 public class Menu {
 	Scanner userInput;
