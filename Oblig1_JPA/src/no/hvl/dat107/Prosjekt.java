@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,7 +27,8 @@ public class Prosjekt {
 			joinColumns = @JoinColumn(name="prosjektId"),
 			inverseJoinColumns = @JoinColumn(name ="ansattId"))
 	private List<Ansatt> ansatte;
-	
+	@OneToMany(mappedBy= "prosjekt")
+	private List<prosjektdeltagelse> deltagelser;
 	
 	public Prosjekt() { // Trengs for JPA
 
