@@ -1,3 +1,5 @@
+package no.hvl.dat107;
+
 
 public class ProsjektdeltagelsePK {
 private int ansattId;

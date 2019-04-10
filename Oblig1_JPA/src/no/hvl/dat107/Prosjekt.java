@@ -28,7 +28,7 @@ public class Prosjekt {
 			inverseJoinColumns = @JoinColumn(name ="ansattId"))
 	private List<Ansatt> ansatte;
 	@OneToMany(mappedBy= "prosjekt")
-	private List<prosjektdeltagelse> deltagelser;
+	private List<Prosjektdeltagelse> deltagelser;
 	
 	public Prosjekt() { // Trengs for JPA
 
