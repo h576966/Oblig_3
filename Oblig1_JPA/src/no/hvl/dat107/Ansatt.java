@@ -2,6 +2,7 @@ package no.hvl.dat107;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +36,10 @@ public class Ansatt {
 	private int ansattAvdeling;
 	@ManyToMany(mappedBy="ansatte")
 	private int ansattProsjekt;
+	
+	@OneToMany(mappedBy="ansatt") 
+	private List<Prosjektdeltagelse> deltagelser;
+	
 	
 	
 
@@ -74,10 +80,6 @@ public class Ansatt {
 
 	public Integer getAnsattId() {
 		return ansattId;
-	}
-
-	public void setansattId(Integer ansattId) {
-		this.ansattId = ansattId;
 	}
 
 	public static LocalDate getLocaldate() {
