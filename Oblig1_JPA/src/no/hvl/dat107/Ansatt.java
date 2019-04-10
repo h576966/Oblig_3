@@ -72,7 +72,7 @@ public class Ansatt {
 		this.ansattProsjekt = ansattProsjekt;
 	}
 
-	public Integer getansattId() {
+	public Integer getAnsattId() {
 		return ansattId;
 	}
 
