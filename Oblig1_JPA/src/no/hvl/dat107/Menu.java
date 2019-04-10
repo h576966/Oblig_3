@@ -1,6 +1,7 @@
 package no.hvl.dat107;
 
 import java.math.BigDecimal;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
@@ -248,10 +249,8 @@ public class Menu {
 			pauseForInput();
 			break;
 		case 3: // Endrat
-			System.out.println("Oppdatera Lonn 1. eller Stilling 2.");
-//			String input = getUserInt();
-//			System.out.println(input);
 			Ansatt forandreAns = finnAnsatt();
+			System.out.println("Oppdatera Lonn 1. eller Stilling 2.");
 			int endre = getUserInt();
 			if (endre == 1) {
 				System.out.print("Skriv inn ny lonn");
@@ -278,9 +277,9 @@ public class Menu {
 			String nyFornavn = getUserString();
 			System.out.println("Skriv inn Etternavn");
 			String nyEtternavn = getUserString();
-			System.out.println("Skriv inn År: XXXX");
+			System.out.println("Skriv inn Aar: XXXX");
 			int aar = getUserInt();
-			System.out.println("Skriv inn Månad: XX");
+			System.out.println("Skriv inn Maaned: XX");
 			int maaned = getUserInt();
 			System.out.println("Skriv inn Dag XX");
 			int dag = getUserInt();
@@ -289,10 +288,14 @@ public class Menu {
 			System.out.println("Angi Lonn");
 			BigDecimal nyLonn = getUserBigDec();
 
+			try {
 			Ansatt nyAnsatt = new Ansatt(nyBrukernavn, nyFornavn, nyEtternavn, LocalDate.of(aar, maaned, dag),
 					nyStilling, nyLonn, 1, 1);
 			ansattEAO.lagreNyAnsatt(nyAnsatt);
 
+			} catch (DateTimeException e) {
+				System.out.println("Time/date not correct format: " + e + "\nPlease try again.");
+			}
 			pauseForInput();
 			break;
 		case 0:
@@ -361,7 +364,7 @@ public class Menu {
 			finnProsjekt();
 		case 2:
 			List<Prosjekt> prosjekt = prosjektEAO.finnAlleProsjekter();
-			System.out.println("b) Hente ut alle prosjekt");
+			System.out.println("Henter ut alle prosjekt");
 			Iterator<Prosjekt> iter = prosjekt.iterator();
 			while (iter.hasNext()) {
 				System.out.println("   " + iter.next());
@@ -373,16 +376,17 @@ public class Menu {
 			System.out.print("Skriv inn nytt navn paa prosjektet.");
 			String navn = getUserString();
 			prosjektChng.setProsjektNavn(navn);
+			System.out.print("Skriv inn beskrivelse paa prosjektet.");
+			String beskrivelse = getUserString();
+			prosjektChng.setBeskrivelse(beskrivelse);
 			prosjektEAO.oppdaterProsjekt(prosjektChng);
 
 			pauseForInput();
 			break;
 		case 4: // Altered from above to fit this
-			System.out.println("Legg til nytt prosjekt, skriv in Prosjektnavn");
-
+			System.out.println("Legg til nytt prosjekt, skriv inn Prosjektnavn.");
 			String nyProsjektnavn = getUserString();
-			System.out.println("Skriv inn Fornavn");
-			System.out.println("Angi beskrivelse");
+			System.out.println("Angi beskrivelse.");
 			String nyBeskrivelse = getUserString();
 
 			Prosjekt nyProsjekt = new Prosjekt(nyProsjektnavn, nyBeskrivelse);
