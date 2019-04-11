@@ -179,4 +179,9 @@ public class Ansatt {
 				+ maanedslonn + ", ansattAvdeling=" + ansattAvdeling + ", ansattProsjekt=" + ansattProsjekt + "]";
 	}
 
+	public void leggTilProsjektdeltagelse(Prosjektdeltagelse pd) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
