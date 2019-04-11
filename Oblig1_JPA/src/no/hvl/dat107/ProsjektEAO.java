@@ -1,4 +1,4 @@
-package no.hvl.dat107.EAO;
+package no.hvl.dat107;
 
 import java.util.List;
 
@@ -7,8 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-
-import no.hvl.dat107.Prosjekt;
 
 public class ProsjektEAO {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ovingPersistenceUnit");
@@ -104,5 +102,26 @@ public class ProsjektEAO {
 		} finally {
 			em.close();
 		}
+	}
+
+	public void leggTilAnsatt(Ansatt ansatt, Prosjekt prosjekt) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try {
+			tx.begin();
+			Prosjektdeltagelse pD = new Prosjektdeltagelse(ansatt, prosjekt);
+			tx.commit();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			if (tx.isActive()) {
+				tx.rollback();
+
+			}
+		} finally {
+			em.close();
+		}
+		
 	}
 }

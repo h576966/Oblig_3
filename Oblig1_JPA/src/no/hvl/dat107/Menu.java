@@ -9,10 +9,6 @@ import java.util.Scanner;
 
 import javax.persistence.NoResultException;
 
-import no.hvl.dat107.EAO.AnsattEAO;
-import no.hvl.dat107.EAO.AvdelingEAO;
-import no.hvl.dat107.EAO.ProsjektEAO;
-
 public class Menu {
 	Scanner userInput;
 	AnsattEAO ansattEAO;
@@ -401,13 +397,13 @@ public class Menu {
 			ansattEAO.registrerProsjektdeltagelse(ansattToAdd, prosjektAdd);
 			pauseForInput();
 			break;
-		case 6:
-			Prosjekt prosjektRemove = finnProsjekt();
-			Ansatt ansattToRemove = finnAnsatt();
-
-			ansattEAO.fjernProsjektdeltagelse(ansattToRemove, prosjektRemove);
-			pauseForInput();
-			break;
+//		case 6:
+//			Prosjekt prosjektRemove = finnProsjekt();
+//			Ansatt ansattToRemove = finnAnsatt();
+//
+//			ansattEAO.fjernProsjektdeltagelse(ansattToRemove, prosjektRemove);
+//			pauseForInput();
+//			break;
 		case 0:
 			System.out.println("Returning to main menu.");
 			start();
@@ -418,34 +414,7 @@ public class Menu {
 	public void test() {
 		start();
 
-//		// c)
-//		List<Ansatt> ansattsc = ansattEAO.finnAnsatteMedTekst("Hassan");
-//		System.out.println("c) Hente ut ansatt med tekst=\"Hassan\"");
-//		System.out.println("   " + ansattsc);
-//
-//		// d)
-//		System.out.println("d) Legge til en ny ansatt med pk=4");
-//		Ansatt ansattny = new Ansatt(4, "Gjore lekser");
-//		ansattEAO.lagreNyAnsatt(ansattny);
-//		Ansatt ansattd = ansattEAO.finnAnsattMedPk(4);
-//		System.out.println("   Henter ut ansatt med pk=4");
-//		System.out.println("   " + ansattd);
-//
-//		// e)
-//		System.out.println("e) Slette ansatt med pk=4");
-//		ansattEAO.slettAnsattMedPk(4);
-//		Ansatt ansatte = ansattEAO.finnAnsattMedBn("asdf");
-//		System.out.println("   Henter ut ansatt med pk=4");
-//		System.out.println("   " + ansatte);
-//
-//		// f)
-//		System.out.println("f) Endre tekst paa ansatt med pk=3");
-//		Ansatt ansattf1 = ansattEAO.finnAnsattMedPk(3);
-//		ansattf1.setTekst("Endret tekst " + LocalTime.now());
-//		ansattEAO.oppdaterAnsatt(ansattf1);
-//		Ansatt ansattf2 = ansattEAO.finnAnsattMedPk(3);
-//		System.out.println("   Henter ut ansatt med pk=3");
-//		System.out.println("   " + ansattf2);
+
 	}
 
 }

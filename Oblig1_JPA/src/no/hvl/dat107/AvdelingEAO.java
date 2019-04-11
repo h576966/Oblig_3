@@ -1,4 +1,4 @@
-package no.hvl.dat107.EAO;
+package no.hvl.dat107;
 
 import java.util.List;
 
@@ -7,8 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-
-import no.hvl.dat107.Avdeling;
 
 public class AvdelingEAO {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ovingPersistenceUnit");
@@ -106,27 +104,27 @@ public class AvdelingEAO {
 		}
 	}
 
-	//
-	//
-//		public void slettAvdelingMedPk(int pk) {
-	//
-//			EntityManager em = emf.createEntityManager();
-//			EntityTransaction tx = em.getTransaction();
-	//
-//			try {
-//				tx.begin();
-//				Avdeling avdeling = em.find(Avdeling.class, pk);
-//				em.remove(avdeling);
-//				tx.commit();
-	//
-//			} catch (Throwable e) {
-//				e.printStackTrace();
-//				if (tx.isActive()) {
-//					tx.rollback();
-//				}
-//			} finally {
-//				em.close();
-//			}
-//		}
+	
+	
+		public void slettAvdelingMedPk(int pk) {
+	
+			EntityManager em = emf.createEntityManager();
+			EntityTransaction tx = em.getTransaction();
+	
+			try {
+				tx.begin();
+				Avdeling avdeling = em.find(Avdeling.class, pk);
+				em.remove(avdeling);
+				tx.commit();
+	
+			} catch (Throwable e) {
+				e.printStackTrace();
+				if (tx.isActive()) {
+					tx.rollback();
+				}
+			} finally {
+				em.close();
+			}
+		}
 
 }

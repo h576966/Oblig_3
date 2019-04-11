@@ -1,4 +1,4 @@
-package no.hvl.dat107.EAO;
+package no.hvl.dat107;
 
 import java.util.List;
 
@@ -7,9 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-
-import no.hvl.dat107.Ansatt;
-import no.hvl.dat107.Prosjekt;
 
 public class AnsattEAO {
 
@@ -89,14 +86,14 @@ public class AnsattEAO {
 		}
 	}
 	
-	public void lagreNyAnsatt(Ansatt ansattny) {
+	public void lagreNyAnsatt(Ansatt a) {
 		
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		
 		try {
 			tx.begin();
-			em.persist(ansattny);
+			em.persist(a);
 			tx.commit();
 		
 		} catch (Throwable e) {
@@ -122,7 +119,27 @@ public class AnsattEAO {
 		}
 	}
 
-		
+	public void lagreNyProsjekt(Prosjekt prosjekt, Ansatt ansatt) {
+
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try {
+			tx.begin();
+			em.persist(prosjekt);
+			tx.commit();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			if (tx.isActive()) {
+				tx.rollback();
+
+			}
+		} finally {
+			em.close();
+		}
+	}
+	
 	public void registrerProsjektdeltagelse(Ansatt a, Prosjekt p) {
 			
 			EntityManager em = emf.createEntityManager();
@@ -132,9 +149,13 @@ public class AnsattEAO {
 				
 				a = em.merge(a);
 				p = em.merge(p);
+
+				Prosjektdeltagelse pd = new Prosjektdeltagelse(a, p);//, 0
 				
-				a.leggTilProsjekt(p);
-				p.leggTilAnsatt(a);
+				a.leggTilProsjektdeltagelse(pd);
+				p.leggTilProsjektdeltagelse(pd);
+				
+				em.persist(pd);
 				
 				tx.commit();
 				
@@ -148,30 +169,38 @@ public class AnsattEAO {
 			}
 		}
 	
-	public void fjernProsjektdeltagelse(Ansatt a, Prosjekt p) {
-		
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		try {
-			tx.begin();
-			
-			a = em.merge(a);
-			p = em.merge(p);
-			
-			a.fjernProsjekt(p);
-			p.fjernAnsatt(a);
-			
-			tx.commit();
-			
-		} catch (Throwable e) {
-			e.printStackTrace();;
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-		} finally {
-			em.close();
-		}
-	}
+//	public void fjernProsjektdeltagelse(Ansatt a, Prosjekt p) {
+//		
+//		EntityManager em = emf.createEntityManager();
+//		EntityTransaction tx = em.getTransaction();
+//		try {
+//			tx.begin();
+//			
+//			//Nytt
+//			ProsjektdeltagelsePK pdpk = new ProsjektdeltagelsePK(a.getAnsattId(),p.getProsjektId());
+//			
+//			Prosjektdeltagelse pd = em.find(Prosjektdeltagelse.class, pdpk);
+//			
+//			em.remove(pd);
+//			
+//			em.merge(a).fjernProjekteltagelse(pd);
+//			em.merge(p).fjernProjekteltagelse(pd);
+//			
+//			a.fjernProsjekt(p);
+//			p.fjernAnsatt(a);
+//			
+//			tx.commit();
+//			
+//		} catch (Throwable e) {
+//			e.printStackTrace();;
+//			if (tx.isActive()) {
+//				tx.rollback();
+//			}
+//		} finally {
+//			em.close();
+//		}
+//	}
+}
 
 //	
 //	public List<Ansatt> finnAnsatteMedTekst(String fornavn) {
@@ -214,4 +243,4 @@ public class AnsattEAO {
 //			em.close();
 //		}
 //	}
-}
+//}

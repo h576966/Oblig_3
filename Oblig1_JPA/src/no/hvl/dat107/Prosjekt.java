@@ -15,25 +15,38 @@ import javax.persistence.Table;
 @Entity
 @Table(schema = "oblig1_jpa", name = "prosjekt")
 public class Prosjekt {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int prosjektId;
 	private String prosjektNavn = "";
 	private String beskrivelse = "";
 	@ManyToMany
-	@JoinTable(
-			name = "oblig1_jpa.prosjektdeltagelse",
-			joinColumns = @JoinColumn(name="prosjektId"),
-			inverseJoinColumns = @JoinColumn(name ="ansattId"))
+	@JoinTable(name = "oblig1_jpa.prosjektdeltagelse", joinColumns = @JoinColumn(name = "prosjektId"), inverseJoinColumns = @JoinColumn(name = "ansattId"))
 	private List<Ansatt> ansatte;
-	@OneToMany(mappedBy= "prosjekt")
+	@OneToMany(mappedBy = "prosjekt")
 	private List<Prosjektdeltagelse> deltagelser;
-	
+
 	public Prosjekt() { // Trengs for JPA
 
 	}
-	
+
+	public List<Ansatt> getAnsatte() {
+		return ansatte;
+	}
+
+	public void setAnsatte(List<Ansatt> ansatte) {
+		this.ansatte = ansatte;
+	}
+
+	public List<Prosjektdeltagelse> getDeltagelser() {
+		return deltagelser;
+	}
+
+	public void setDeltagelser(List<Prosjektdeltagelse> deltagelser) {
+		this.deltagelser = deltagelser;
+	}
+
 	public Prosjekt(String prosjektNavn, String beskrivelse) {
 
 		this.prosjektNavn = prosjektNavn;
@@ -59,10 +72,14 @@ public class Prosjekt {
 	public int getProsjektId() {
 		return prosjektId;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Prosjekt [prosjektnavn=" + prosjektNavn + ", beskrivelse=" + getBeskrivelse()
-				+ "]";
+		return "Prosjekt [prosjektnavn=" + prosjektNavn + ", beskrivelse=" + getBeskrivelse() + "]";
+	}
+
+	public  void lagreNyAnsatt(Ansatt a) {
+		ProsjektEAO pEAO = new ProsjektEAO();
+		pEAO.leggTilAnsatt(a,this);
 	}
 }

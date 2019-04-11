@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import no.hvl.dat107.EAO.AnsattEAO;
-
 @Entity
 @Table(schema = "oblig1_jpa", name = "avdeling")
 public class Avdeling {

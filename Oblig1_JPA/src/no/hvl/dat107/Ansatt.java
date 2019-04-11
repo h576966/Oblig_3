@@ -30,23 +30,49 @@ public class Ansatt {
 	private LocalDate ansettelsesdato;
 	private String stilling = "";
 	private BigDecimal maanedslonn;
-	
+
 	@ManyToOne
-	@JoinColumn(name="avdeling", referencedColumnName="avdelingsid")
+	@JoinColumn(name = "avdeling", referencedColumnName = "avdelingsid")
 	private int ansattAvdeling;
-	@ManyToMany(mappedBy="ansatte")
+	@ManyToMany(mappedBy = "ansatte")
 	private int ansattProsjekt;
-	
-	@OneToMany(mappedBy="ansatt") 
+
+	@OneToMany(mappedBy = "ansatt")
 	private List<Prosjektdeltagelse> deltagelser;
-	
-	
-	
+
+	@ManyToMany(mappedBy = "ansatte")
+	private List<Prosjekt> prosjekter;
 
 	public Ansatt() { // Trengs for JPA
 
 	}
 //	this("","","",LocalDate,"",BigDecimal);}
+
+	public LocalDate getAnsettelsesdato() {
+		return ansettelsesdato;
+	}
+
+	public void setAnsettelsesdato(LocalDate ansettelsesdato) {
+		this.ansettelsesdato = ansettelsesdato;
+	}
+
+	public List<Prosjektdeltagelse> getDeltagelser() {
+		return deltagelser;
+	}
+
+	public void setDeltagelser(List<Prosjektdeltagelse> deltagelser) {
+		this.deltagelser = deltagelser;
+	}
+
+	public List<Prosjekt> getProsjekter() {
+		return prosjekter;
+	}
+
+	public void setProsjekter(List<Prosjekt> prosjekter) {
+		this.prosjekter = prosjekter;
+	}
+
+	
 
 	public Ansatt(String brukernavn, String fornavn, String etternavn, LocalDate ansettelsesdato, String stilling,
 			BigDecimal maanedslonn, int ansattAvdeling, int ansattProsjekt) {
@@ -141,7 +167,11 @@ public class Ansatt {
 	public void setMaanedslonn(BigDecimal maanedslonn) {
 		this.maanedslonn = maanedslonn;
 	}
-
+	public  void lagreNyProsjekt(Prosjekt p) {
+		AnsattEAO aEAO = new AnsattEAO();
+		aEAO.lagreNyProsjekt(p,this);
+	}
+			
 	@Override
 	public String toString() {
 		return "Ansatt [ansattId=" + ansattId + ", brukernavn=" + brukernavn + ", fornavn=" + fornavn + ", etternavn="
