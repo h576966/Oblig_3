@@ -1,4 +1,4 @@
-package no.hvl.dat107;
+package no.hvl.entity;
 
 import java.util.List;
 
@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import no.hvl.eao.ProsjektEAO;
+
 @Entity
 @Table(schema = "oblig1_jpa", name = "prosjekt")
 public class Prosjekt {
@@ -19,11 +21,13 @@ public class Prosjekt {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int prosjektId;
-	private String prosjektNavn = "";
-	private String beskrivelse = "";
-	@ManyToMany
-	@JoinTable(name = "oblig1_jpa.prosjektdeltagelse", joinColumns = @JoinColumn(name = "prosjektId"), inverseJoinColumns = @JoinColumn(name = "ansattId"))
-	private List<Ansatt> ansatte;
+	private String prosjektNavn;
+	private String beskrivelse;
+//	@ManyToMany
+//	@JoinTable(name = "oblig1_jpa.prosjektdeltagelse", 
+//	joinColumns = @JoinColumn(name = "prosjektId"), 
+//	inverseJoinColumns = @JoinColumn(name = "ansattId"))
+//	private List<Ansatt> ansatte;
 	@OneToMany(mappedBy = "prosjekt")
 	private List<Prosjektdeltagelse> deltagelser;
 
@@ -31,13 +35,13 @@ public class Prosjekt {
 
 	}
 
-	public List<Ansatt> getAnsatte() {
-		return ansatte;
-	}
+//	public List<Ansatt> getAnsatte() {
+//		return ansatte;
+//	}
 
-	public void setAnsatte(List<Ansatt> ansatte) {
-		this.ansatte = ansatte;
-	}
+//	public void setAnsatte(List<Ansatt> ansatte) {
+//		this.ansatte = ansatte;
+//	}
 
 	public List<Prosjektdeltagelse> getDeltagelser() {
 		return deltagelser;
@@ -77,9 +81,14 @@ public class Prosjekt {
 	public String toString() {
 		return "Prosjekt [prosjektnavn=" + prosjektNavn + ", beskrivelse=" + getBeskrivelse() + "]";
 	}
-
-	public  void lagreNyAnsatt(Ansatt a) {
-		ProsjektEAO pEAO = new ProsjektEAO();
-		pEAO.leggTilAnsatt(a,this);
-	}
+	
+	   public void leggTilProsjektdeltagelse(Prosjektdeltagelse prosjektdeltagelse) {
+	        deltagelser.add(prosjektdeltagelse);
+	   }
+	   
+	   
+//	public  void lagreNyAnsatt(Ansatt a) {
+//		ProsjektEAO pEAO = new ProsjektEAO();
+//		pEAO.leggTilAnsatt(a,this);
+//	}
 }

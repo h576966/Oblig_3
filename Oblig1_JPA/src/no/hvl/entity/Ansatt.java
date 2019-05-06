@@ -1,4 +1,4 @@
-package no.hvl.dat107;
+package no.hvl.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import no.hvl.eao.AnsattEAO;
+
 @Entity
 @Table(schema = "oblig1_jpa", name = "ansatt")
 public class Ansatt {
@@ -24,29 +26,40 @@ public class Ansatt {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ansattId;
-	private String brukernavn = "";
-	private String fornavn = "";
-	private String etternavn = "";
+	private String brukernavn;
+	private String fornavn;
+	private String etternavn;
 	private LocalDate ansettelsesdato;
-	private String stilling = "";
+	private String stilling;
 	private BigDecimal maanedslonn;
 
-	@ManyToOne
-	@JoinColumn(name = "avdeling", referencedColumnName = "avdelingsid")
-	private int ansattAvdeling;
-	@ManyToMany(mappedBy = "ansatte")
-	private int ansattProsjekt;
+//	@ManyToOne
+//	@JoinColumn(name = "avdeling", referencedColumnName = "avdelingsid")
+//	private int ansattAvdeling;
+//	@ManyToMany(mappedBy = "ansatte")
+//	private int ansattProsjekt;
 
 	@OneToMany(mappedBy = "ansatt")
 	private List<Prosjektdeltagelse> deltagelser;
 
-	@ManyToMany(mappedBy = "ansatte")
-	private List<Prosjekt> prosjekter;
+//	@ManyToMany(mappedBy = "ansatte")
+//	private List<Prosjekt> prosjekter;
 
 	public Ansatt() { // Trengs for JPA
 
 	}
 //	this("","","",LocalDate,"",BigDecimal);}
+	
+	public Ansatt(String brukernavn, String fornavn, String etternavn, LocalDate ansettelsesdato, String stilling,
+			BigDecimal maanedslonn) {
+		this.brukernavn = brukernavn;
+		this.fornavn = fornavn;
+		this.etternavn = etternavn;
+		this.ansettelsesdato = ansettelsesdato;
+		this.stilling = stilling;
+		this.maanedslonn = maanedslonn;
+		
+	}
 
 	public LocalDate getAnsettelsesdato() {
 		return ansettelsesdato;
@@ -64,13 +77,13 @@ public class Ansatt {
 		this.deltagelser = deltagelser;
 	}
 
-	public List<Prosjekt> getProsjekter() {
-		return prosjekter;
-	}
+//	public List<Prosjekt> getProsjekter() {
+//		return prosjekter;
+//	}
 
-	public void setProsjekter(List<Prosjekt> prosjekter) {
-		this.prosjekter = prosjekter;
-	}
+//	public void setProsjekter(List<Prosjekt> prosjekter) {
+//		this.prosjekter = prosjekter;
+//	}
 
 	
 
@@ -83,26 +96,26 @@ public class Ansatt {
 		this.ansettelsesdato = ansettelsesdato;
 		this.stilling = stilling;
 		this.maanedslonn = maanedslonn;
-		this.ansattAvdeling = ansattAvdeling;
-		this.ansattProsjekt = ansattProsjekt;
+//		this.ansattAvdeling = ansattAvdeling;
+//		this.ansattProsjekt = ansattProsjekt;
 
 	}
 
-	public int getAnsattAvdeling() {
-		return ansattAvdeling;
-	}
+//	public int getAnsattAvdeling() {
+//		return ansattAvdeling;
+//	}
 
-	public void setAnsattAvdeling(int ansattAvdeling) {
-		this.ansattAvdeling = ansattAvdeling;
-	}
-
-	public int getAnsattProsjekt() {
-		return ansattProsjekt;
-	}
-
-	public void setAnsattProsjekt(int ansattProsjekt) {
-		this.ansattProsjekt = ansattProsjekt;
-	}
+//	public void setAnsattAvdeling(int ansattAvdeling) {
+//		this.ansattAvdeling = ansattAvdeling;
+//	}
+//
+//	public int getAnsattProsjekt() {
+//		return ansattProsjekt;
+//	}
+//
+//	public void setAnsattProsjekt(int ansattProsjekt) {
+//		this.ansattProsjekt = ansattProsjekt;
+//	}
 
 	public Integer getAnsattId() {
 		return ansattId;
@@ -176,11 +189,11 @@ public class Ansatt {
 	public String toString() {
 		return "Ansatt [ansattId=" + ansattId + ", brukernavn=" + brukernavn + ", fornavn=" + fornavn + ", etternavn="
 				+ etternavn + ", ansettelsesdato=" + ansettelsesdato + ", stilling=" + stilling + ", maanedslonn="
-				+ maanedslonn + ", ansattAvdeling=" + ansattAvdeling + ", ansattProsjekt=" + ansattProsjekt + "]";
+				+ maanedslonn + "]";
 	}
 
 	public void leggTilProsjektdeltagelse(Prosjektdeltagelse pd) {
-		// TODO Auto-generated method stub
+
 		
 	}
 

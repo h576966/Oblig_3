@@ -1,4 +1,4 @@
-package no.hvl.dat107;
+package no.hvl.eao;
 
 import java.util.List;
 
@@ -8,10 +8,16 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import no.hvl.entity.Ansatt;
+import no.hvl.entity.Prosjekt;
+import no.hvl.entity.Prosjektdeltagelse;
+
 public class AnsattEAO {
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ovingPersistenceUnit");
 
+	
+	
 	public Ansatt finnAnsattMedId(int ansattId) {
 
 		EntityManager em = emf.createEntityManager();
@@ -140,17 +146,17 @@ public class AnsattEAO {
 		}
 	}
 	
-	public void registrerProsjektdeltagelse(Ansatt a, Prosjekt p) {
+	public void registrerProsjektdeltagelse(Ansatt a, Prosjekt p, String prosjektRolle) {
 			
 			EntityManager em = emf.createEntityManager();
 			EntityTransaction tx = em.getTransaction();
 			try {
-				tx.begin();
 				
+				tx.begin();
 				a = em.merge(a);
 				p = em.merge(p);
 
-				Prosjektdeltagelse pd = new Prosjektdeltagelse(a, p);//, 0
+			Prosjektdeltagelse pd = new Prosjektdeltagelse(a, p, 0, prosjektRolle );//, 0
 				
 				a.leggTilProsjektdeltagelse(pd);
 				p.leggTilProsjektdeltagelse(pd);
@@ -168,6 +174,8 @@ public class AnsattEAO {
 				em.close();
 			}
 		}
+	
+	
 	
 //	public void fjernProsjektdeltagelse(Ansatt a, Prosjekt p) {
 //		

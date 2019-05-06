@@ -1,4 +1,4 @@
-package no.hvl.dat107;
+package no.hvl.eao;
 
 import java.util.List;
 
@@ -8,8 +8,15 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import no.hvl.entity.Ansatt;
+import no.hvl.entity.Prosjekt;
+import no.hvl.entity.Prosjektdeltagelse;
+
 public class ProsjektEAO {
+	
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ovingPersistenceUnit");
+	
+	
 	
 	public Prosjekt finnProsjektMedId(int prosjektId) {
 
@@ -26,6 +33,40 @@ public class ProsjektEAO {
 		return prosjekt;
 	}
 	
+	
+	public String lagreIDatabasen(Prosjekt ny) {
+
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try {
+			tx.begin();
+			em.persist(ny);
+			tx.commit();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			em.close();
+		}
+		return ny.getProsjektNavn();
+	}
+	
+//	 public Prosjekt finnProsjektMedId(int id) {
+//
+//	        EntityManager em = emf.createEntityManager();
+//
+//	        Prosjekt prosjekt = null;
+//	        try {
+//	            prosjekt = em.find(Prosjekt.class, id);
+//	        } finally {
+//	            em.close();
+//	        }
+//	        return prosjekt;
+//	    }
+//
+//	
 	public Prosjekt finnProsjektMedNavn(String navn) {
 
 		EntityManager em = emf.createEntityManager();
@@ -104,24 +145,24 @@ public class ProsjektEAO {
 		}
 	}
 
-	public void leggTilAnsatt(Ansatt ansatt, Prosjekt prosjekt) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-
-		try {
-			tx.begin();
-			Prosjektdeltagelse pD = new Prosjektdeltagelse(ansatt, prosjekt);
-			tx.commit();
-
-		} catch (Throwable e) {
-			e.printStackTrace();
-			if (tx.isActive()) {
-				tx.rollback();
-
-			}
-		} finally {
-			em.close();
-		}
-		
-	}
+//	public void leggTilAnsatt(Ansatt ansatt, Prosjekt prosjekt) {
+//		EntityManager em = emf.createEntityManager();
+//		EntityTransaction tx = em.getTransaction();
+//
+//		try {
+//			tx.begin();
+//			Prosjektdeltagelse pD = new Prosjektdeltagelse(ansatt, prosjekt);
+//			tx.commit();
+//
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//			if (tx.isActive()) {
+//				tx.rollback();
+//
+//			}
+//		} finally {
+//			em.close();
+//		}
+//		
+//	}
 }

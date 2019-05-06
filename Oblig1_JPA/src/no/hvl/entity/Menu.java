@@ -1,4 +1,4 @@
-package no.hvl.dat107;
+package no.hvl.entity;
 
 import java.math.BigDecimal;
 import java.time.DateTimeException;
@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.persistence.NoResultException;
+
+import no.hvl.eao.AnsattEAO;
+import no.hvl.eao.AvdelingEAO;
+import no.hvl.eao.ProsjektEAO;
 
 public class Menu {
 	Scanner userInput;
@@ -393,8 +397,9 @@ public class Menu {
 		case 5:
 			Prosjekt prosjektAdd = finnProsjekt();
 			Ansatt ansattToAdd = finnAnsatt();
+			String prosjektRolle = getUserString();
 
-			ansattEAO.registrerProsjektdeltagelse(ansattToAdd, prosjektAdd);
+			ansattEAO.registrerProsjektdeltagelse(ansattToAdd, prosjektAdd, prosjektRolle);
 			pauseForInput();
 			break;
 //		case 6:

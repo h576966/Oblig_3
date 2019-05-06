@@ -1,4 +1,4 @@
-package no.hvl.dat107;
+package no.hvl.entity;
 
 import java.util.List;
 
@@ -10,17 +10,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import no.hvl.eao.AnsattEAO;
+
 @Entity
 @Table(schema = "oblig1_jpa", name = "avdeling")
 public class Avdeling {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int avdelingsId;
-	private String avdelingsNavn = "";
+	private String avdelingsNavn;
 	private int avdelingsSjef;
-	// Setter inn one to many relasjon
-	@OneToMany(mappedBy = "avdeling", fetch = FetchType.EAGER)
-	private List<Ansatt> Ansatte;
+//	// Setter inn one to many relasjon
+//	@OneToMany(mappedBy = "avdeling", fetch = FetchType.EAGER)
+//	private List<Ansatt> Ansatte;
 	
 	public Avdeling() { // Trengs for JPA
 
