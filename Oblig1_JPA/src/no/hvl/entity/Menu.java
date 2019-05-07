@@ -230,7 +230,7 @@ public class Menu {
 
 	private void valgAnsatt() {
 		System.out.println("Velg en av de folgende: ");
-		System.out.println("1. Finn ansatt." + "2. List alle ansatte.\n" + "3. Oppdatere ansatt. \n"
+		System.out.println("1. Finn ansatt.\n" + "2. List alle ansatte.\n" + "3. Oppdatere ansatt. \n"
 				+ "4. Legg til ny ansatt. \n" + "0. Return upwards.");
 
 		int userSelection = getUserInt();

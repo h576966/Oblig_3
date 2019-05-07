@@ -38,6 +38,7 @@ CREATE TABLE prosjekt (
 );
 
 CREATE TABLE prosjektdeltagelse (
+	--prosjektdeltagelseid SERIAL NOT NULL,
 	prosjektid		INTEGER NOT NULL,
 	ansattid		INTEGER NOT NULL,
 	prosjektrolle 	VARCHAR(20) NOT NULL,
