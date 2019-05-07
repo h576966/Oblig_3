@@ -33,8 +33,6 @@ public class Ansatt {
 	private String stilling;
 	private BigDecimal maanedslonn;
 
-
-
 	@OneToMany(mappedBy = "ansatt")
 	private List<Prosjektdeltagelse> deltagelser;
 
