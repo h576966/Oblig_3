@@ -53,20 +53,7 @@ public class ProsjektEAO {
 		return ny.getProsjektNavn();
 	}
 	
-//	 public Prosjekt finnProsjektMedId(int id) {
-//
-//	        EntityManager em = emf.createEntityManager();
-//
-//	        Prosjekt prosjekt = null;
-//	        try {
-//	            prosjekt = em.find(Prosjekt.class, id);
-//	        } finally {
-//	            em.close();
-//	        }
-//	        return prosjekt;
-//	    }
-//
-//	
+
 	public Prosjekt finnProsjektMedNavn(String navn) {
 
 		EntityManager em = emf.createEntityManager();
@@ -74,7 +61,7 @@ public class ProsjektEAO {
 		Prosjekt prosjekt;
 
 		try {
-			// https://docs.oracle.com/javaee/6/tutorial/doc/bnbtg.html
+	
 			TypedQuery<Prosjekt> query = em
 					.createQuery("SELECT a FROM Prosjekt a WHERE a.prosjektnavn " 
 			+ "LIKE :prosjektnavn", Prosjekt.class);
@@ -145,24 +132,4 @@ public class ProsjektEAO {
 		}
 	}
 
-//	public void leggTilAnsatt(Ansatt ansatt, Prosjekt prosjekt) {
-//		EntityManager em = emf.createEntityManager();
-//		EntityTransaction tx = em.getTransaction();
-//
-//		try {
-//			tx.begin();
-//			Prosjektdeltagelse pD = new Prosjektdeltagelse(ansatt, prosjekt);
-//			tx.commit();
-//
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//			if (tx.isActive()) {
-//				tx.rollback();
-//
-//			}
-//		} finally {
-//			em.close();
-//		}
-//		
-//	}
 }

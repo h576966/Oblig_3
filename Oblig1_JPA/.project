@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>lib</name>
-			<type>2</type>
-			<location>/Users/niklasjohansson/Documents/Programmering/GitHub/dat107-v2019/F2_Eksempel0_Todos_losning/lib</location>
-		</link>
-	</linkedResources>
 </projectDescription>

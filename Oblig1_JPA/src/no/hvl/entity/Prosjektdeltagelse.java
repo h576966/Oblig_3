@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(schema = "oblig1_jpa")
-//@IdClass(ProsjektdeltagelsePK.class)
 public class Prosjektdeltagelse {
 	
 	
@@ -63,9 +62,6 @@ public class Prosjektdeltagelse {
 	public void setArbeidsTimer(BigDecimal arbeidsTimer) {
 		this.arbeidsTimer = arbeidsTimer;
 	}
-//	public void skrivUt(String innrykk) {
-//        System.out.printf("%sDeltagelse: %s %s, %s, %d timer, %s", innrykk, 
-//                ansatt.getFornavn(), ansatt.getEtternavn(), prosjekt.getNavn(), timer, rolle);
-//    }
+
 
 }

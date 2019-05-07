@@ -23,11 +23,6 @@ public class Prosjekt {
 	private int prosjektId;
 	private String prosjektNavn;
 	private String beskrivelse;
-//	@ManyToMany
-//	@JoinTable(name = "oblig1_jpa.prosjektdeltagelse", 
-//	joinColumns = @JoinColumn(name = "prosjektId"), 
-//	inverseJoinColumns = @JoinColumn(name = "ansattId"))
-//	private List<Ansatt> ansatte;
 	@OneToMany(mappedBy = "prosjekt")
 	private List<Prosjektdeltagelse> deltagelser;
 
@@ -35,13 +30,6 @@ public class Prosjekt {
 
 	}
 
-//	public List<Ansatt> getAnsatte() {
-//		return ansatte;
-//	}
-
-//	public void setAnsatte(List<Ansatt> ansatte) {
-//		this.ansatte = ansatte;
-//	}
 
 	public List<Prosjektdeltagelse> getDeltagelser() {
 		return deltagelser;
@@ -87,8 +75,5 @@ public class Prosjekt {
 	   }
 	   
 	   
-//	public  void lagreNyAnsatt(Ansatt a) {
-//		ProsjektEAO pEAO = new ProsjektEAO();
-//		pEAO.leggTilAnsatt(a,this);
-//	}
+
 }

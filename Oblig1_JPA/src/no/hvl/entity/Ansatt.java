@@ -33,22 +33,15 @@ public class Ansatt {
 	private String stilling;
 	private BigDecimal maanedslonn;
 
-//	@ManyToOne
-//	@JoinColumn(name = "avdeling", referencedColumnName = "avdelingsid")
-//	private int ansattAvdeling;
-//	@ManyToMany(mappedBy = "ansatte")
-//	private int ansattProsjekt;
+
 
 	@OneToMany(mappedBy = "ansatt")
 	private List<Prosjektdeltagelse> deltagelser;
 
-//	@ManyToMany(mappedBy = "ansatte")
-//	private List<Prosjekt> prosjekter;
-
 	public Ansatt() { // Trengs for JPA
 
 	}
-//	this("","","",LocalDate,"",BigDecimal);}
+
 	
 	public Ansatt(String brukernavn, String fornavn, String etternavn, LocalDate ansettelsesdato, String stilling,
 			BigDecimal maanedslonn) {
@@ -77,15 +70,6 @@ public class Ansatt {
 		this.deltagelser = deltagelser;
 	}
 
-//	public List<Prosjekt> getProsjekter() {
-//		return prosjekter;
-//	}
-
-//	public void setProsjekter(List<Prosjekt> prosjekter) {
-//		this.prosjekter = prosjekter;
-//	}
-
-	
 
 	public Ansatt(String brukernavn, String fornavn, String etternavn, LocalDate ansettelsesdato, String stilling,
 			BigDecimal maanedslonn, int ansattAvdeling, int ansattProsjekt) {
@@ -96,26 +80,9 @@ public class Ansatt {
 		this.ansettelsesdato = ansettelsesdato;
 		this.stilling = stilling;
 		this.maanedslonn = maanedslonn;
-//		this.ansattAvdeling = ansattAvdeling;
-//		this.ansattProsjekt = ansattProsjekt;
 
 	}
 
-//	public int getAnsattAvdeling() {
-//		return ansattAvdeling;
-//	}
-
-//	public void setAnsattAvdeling(int ansattAvdeling) {
-//		this.ansattAvdeling = ansattAvdeling;
-//	}
-//
-//	public int getAnsattProsjekt() {
-//		return ansattProsjekt;
-//	}
-//
-//	public void setAnsattProsjekt(int ansattProsjekt) {
-//		this.ansattProsjekt = ansattProsjekt;
-//	}
 
 	public Integer getAnsattId() {
 		return ansattId;

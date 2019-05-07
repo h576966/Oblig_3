@@ -20,9 +20,7 @@ public class Avdeling {
 	private int avdelingsId;
 	private String avdelingsNavn;
 	private int avdelingsSjef;
-//	// Setter inn one to many relasjon
-//	@OneToMany(mappedBy = "avdeling", fetch = FetchType.EAGER)
-//	private List<Ansatt> Ansatte;
+
 	
 	public Avdeling() { // Trengs for JPA
 
